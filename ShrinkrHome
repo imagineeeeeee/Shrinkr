@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Homepage</title>
+<link rel="stylesheet" href="ShrinkrHome.css">
+</head>
+<body>
+<h1>My Homepage</h1>
+<div class="container">
+  <p>This is my homepage.</p>
+  <p>I've added some rounded corners and a clean finish using CSS.</p>
+</div>
+</body>
+</html>
