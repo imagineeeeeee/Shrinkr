@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shrinkr</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Chat Platform</h1>
+<div class="container">
+  <h2>Choose a name</h2>
+  <input type="text" id="name" placeholder="Your name">
+  <button id="submit">Submit</button>
+</div>
+<script>
+document.getElementById("submit").onclick = function() {
+  var name = document.getElementById("name").value;
+  if (name == "") {
+    alert("Please enter a name");
+    return;
+  }
+  window.location.href = "chat.html?name=" + name;
+};
+</script>
+</body>
+</html>
