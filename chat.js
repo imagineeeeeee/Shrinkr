@@ -45,7 +45,11 @@ document.getElementById("submit").onclick = function() {
 };
 
 window.onload = function() {
-  addLobby("American");
-  addLobby("Spanish");
+  addLobby("Lobby 1");
+  addLobby("Lobby 2");
   updateChat();
 };
+
+function showName(message) {
+  return "<strong>" + message.name + ":</strong> " + message.message;
+}
