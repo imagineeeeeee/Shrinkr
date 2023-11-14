@@ -1,55 +1,38 @@
-var lobbies = [];
+var messages = []; // Store all messages in a central array
 
-function addLobby(name) {
-  lobbies.push({
-    name: name,
-    messages: []
-  });
-}
-
-function joinLobby(name) {
-  for (var i = 0; i < lobbies.length; i++) {
-    if (lobbies[i].name == name) {
-      document.getElementById("lobby-" + name).style.display = "block";
-      break;
-    }
-  }
-}
-
-function sendMessage(lobby, name, message) {
-  lobbies[lobby].messages.push({
+function sendMessage(name, message) {
+  messages.push({
     name: name,
     message: message
   });
+
+  // Broadcast the message to all connected clients
+  updateChat();
 }
 
 function updateChat() {
-  for (var i = 0; i < lobbies.length; i++) {
-    var lobby = lobbies[i];
-    var messages = lobby.messages;
-    var messageList = document.getElementById("message-list-" + lobby.name);
-    messageList.innerHTML = "";
-    for (var j = 0; j < messages.length; j++) {
-      var message = messages[j];
-      var messageDiv = document.createElement("div");
-      messageDiv.innerHTML = "<strong>" + message.name + ":</strong> " + message.message;
-      messageList.appendChild(messageDiv);
-    }
+  var messageList = document.getElementById("message-list");
+  messageList.innerHTML = "";
+
+  for (var i = 0; i < messages.length; i++) {
+    var message = messages[i];
+    var messageDiv = document.createElement("div");
+    messageDiv.innerHTML = showName(message);
+    messageList.appendChild(messageDiv);
   }
 }
 
+// Handle message submission
 document.getElementById("submit").onclick = function() {
   var name = document.getElementById("name").value;
-  var lobby = document.getElementById("lobby").value;
-  sendMessage(lobby, name, document.getElementById("message").value);
+  var message = document.getElementById("message").value;
+
+  sendMessage(name, message);
+
+  document.getElementById("message").value = "";
 };
 
+// Display initial messages
 window.onload = function() {
-  addLobby("Lobby 1");
-  addLobby("Lobby 2");
   updateChat();
 };
-
-function showName(message) {
-  return "<strong>" + message.name + ":</strong> " + message.message;
-}
